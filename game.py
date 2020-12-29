@@ -42,11 +42,11 @@ def end_game():
     print(msg)
     sys.exit(0)
     
-print("Type 'cancel' to exit.")
+print("Type 'exit' to exit.")
 while(game_state):
     try:
         user_guess = input(f'what is the {make_ordinal(current_index+1)} digit of PI: ')
-        if user_guess == 'cancel':
+        if user_guess == 'exit':
             end_game()
         print(check_guess(int(user_guess)))
     except ValueError:
