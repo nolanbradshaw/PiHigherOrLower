@@ -7,7 +7,7 @@ game_state = True
 
 with open('digits_of_pi.txt') as f:
     # Read all digits into list without decimal.
-    digits = [int(x) for x in f.read() if x != '.']
+    digits = [int(digit) for digit in f.read() if digit != '.']
 
 def get_current_pi():
     # Read current correctly guessed digits into str.
@@ -34,16 +34,19 @@ def check_guess(guess):
         return f'CORRECT! {current_pi}'
 
 def end_game():
-    if current_index == 0:
-        msg = 'Thank you for playing.'
-    else:
-        msg = 'Thank you for playing. You correctly guessed {current_index+1} digits.'
+    msg = 'Thank you for playing.'
+    if current_index == len(digits):
+        msg += ' You correctly guessed all digits.'
+    elif current_index > 0:
+        msg += f' You correctly guessed {current_index} digits.'
         
     print(msg)
     sys.exit(0)
     
-print("Type 'exit' to exit.")
+print("Type 'exit' to quit.")
 while(game_state):
+    if current_index == len(digits):
+        end_game()
     try:
         user_guess = input(f'what is the {make_ordinal(current_index+1)} digit of PI: ')
         if user_guess == 'exit':
